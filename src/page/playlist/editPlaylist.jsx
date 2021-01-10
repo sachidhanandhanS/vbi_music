@@ -6,19 +6,25 @@ import {
   Grid,
   Button
 } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+import ShuffleIcon from '@material-ui/icons/Shuffle';
 import GlobalStore from '../../store'
 import SongCard from '../../components/cards/song'
 import { REMOVE_SONG_FROM_PLAYLIST } from '../../utils/constant'
-
 const styles = ({
   container: {
-    paddingTop: '40px'
+    padding: '60px',
+    overflow: 'auto',
+    height: 'calc(100% - 185px)'
   },
   title: {
     marginBottom: '30px'
   },
   browseBtn: {
     marginTop: '20px'
+  },
+  mr20: {
+    marginRight: '20px'
   }
 })
 
@@ -42,6 +48,12 @@ class EditPlaylist extends React.Component {
       state: {
         enableSelection: true
       }
+    })
+  }
+
+  handleShuffle = () => {
+    this.context.dispatch({
+      type: 'SHUFFLE_SONGS'
     })
   }
 
@@ -82,7 +94,11 @@ class EditPlaylist extends React.Component {
   renderSongs = (playlist) => {
     return (
       playlist.songs.map(song => (
-        <SongCard song={song} handleClose={() => this.handleDelete(song)}/>
+        <SongCard
+          song={song}
+          key={song.id}
+          handleClose={() => this.handleDelete(song)}
+        />
       ))
     )
   }
@@ -92,18 +108,32 @@ class EditPlaylist extends React.Component {
     const playlist = this.context.state.playlist.playlist || {}
     const hasSongs = playlist.songs && playlist.songs.length 
     return(
-      <Container className={classes.container}>
+      <main className={classes.container}>
         <Grid container justify="space-between" alignItems="center" className={classes.title}>
           <Typography variant="h5">
             {playlist.name}
           </Typography>
-          {hasSongs ? <Button
-            variant="outlined"
-            color="primary"
-            onClick={this.handleRoute}
-          >
-            Add Song
-          </Button> : ''}
+          {hasSongs ? (
+            <Grid container item xs={6} justify="flex-end">
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.mr20}
+                onClick={this.handleShuffle}
+                startIcon={<ShuffleIcon color="primary" />}
+              >
+                Shuffle
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleRoute}
+                startIcon={<AddIcon />}
+              >
+                Add Song
+              </Button>
+            </Grid>
+            ) : ''}
         </Grid>
         <Grid container className={classes.containerBody}>
           {!hasSongs
@@ -111,7 +141,7 @@ class EditPlaylist extends React.Component {
             : this.renderSongs(playlist)
           }
         </Grid>
-      </Container>
+      </main>
     )
   }
 }

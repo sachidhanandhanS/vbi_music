@@ -21,3 +21,8 @@ export const getFormatedDate = () => {
   const period =  date.getHours() > 12 ? 'pm' : 'am'
   return `${day} ${month}, ${date.getFullYear()} ${date.getHours() % 12}:${date.getMinutes()} ${period}`
 }
+
+export const shuffleArray = (arr) => {
+  const newArray = [...arr]
+  return newArray.sort(() => Math.random() - 0.5)
+}

@@ -1,4 +1,4 @@
-import { generateUUID, getFormatedDate } from '../../utils/common'
+import { generateUUID, getFormatedDate, shuffleArray } from '../../utils/common'
 
 export const initialPlaylistState = {
   playlist: {},
@@ -60,6 +60,14 @@ export default function reducer(state, action) {
           }
           return item
         })
+      }
+    case 'SHUFFLE_SONGS':
+      return {
+        ...state,
+        playlist: {
+          ...state.playlist,
+          songs: shuffleArray(state.playlist.songs)
+        }
       }
     default:
       return state;

@@ -1,29 +1,10 @@
 import React from 'react'
 import {
   Grid,
-  makeStyles,
   Checkbox
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/CloseOutlined' 
-
-const useStyles = makeStyles(() => ({
-  songComponent: {
-    height: '74px',
-    padding: '12px',
-    '&:hover': {
-      backgroundColor: '#ffffff',
-      border: '1px solid #d7dee8',
-      borderRadius: '4px'
-    }
-  },
-  img: {
-    width: '40px',
-    height: '40px'
-  },
-  closeIcon: {
-    cursor: 'pointer'
-  }
-}));
+import useStyles from './styles'
 
 const Song = ({
   showCheckbox,
@@ -34,7 +15,7 @@ const Song = ({
 }) => {
   const classes = useStyles()
   return (
-    <Grid container alignItems="center" key={song.id} className={classes.songComponent}>
+    <Grid container alignItems="center" className={classes.songComponent}>
       {showCheckbox ?<Grid item xs={2} sm={1}>
         <Checkbox
           value={song.id}

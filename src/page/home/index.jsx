@@ -28,7 +28,8 @@ class Home extends React.Component {
       filteredSongs: [],
       page: 1,
       paginatedSongs: [],
-      selectedSongs: []
+      selectedSongs: [],
+      selectedPlaylist: {}
     }
 
     this.handleSearch = debounce(this.handleSearch, 500)
@@ -37,8 +38,17 @@ class Home extends React.Component {
   componentDidMount() {
     const { location: { state }, history } = this.props
     if (state && state.enableSelection) {
+      const selectedPlaylist = this.context.state.playlist.playlist
+      const selectedSongs = {}
+      if(selectedPlaylist.songs && selectedPlaylist.songs.length) {
+        selectedPlaylist.songs.forEach(song => {
+          selectedSongs[song.id] = song
+        })
+      }
       this.setState({
-        enableAdd: true
+        enableAdd: true,
+        selectedPlaylist,
+        selectedSongs
       }, () => history.replace('/', null))
     }
     this.getSongs()
@@ -107,9 +117,8 @@ class Home extends React.Component {
   }
 
   addToList = () => {
-    const { selectedSongs } = this.state
+    const { selectedSongs, selectedPlaylist } = this.state
     const { history } = this.props
-    const id = this.context.state.playlist.playlist.id
     this.context.dispatch({
       type: 'ADD_SONGS',
       payload: Object.values(selectedSongs)
@@ -120,13 +129,14 @@ class Home extends React.Component {
         message: ADD_SONG_TO_PLAYLIST
       }
     })
-    history.push(`/playlist/${id}`)
+    history.push(`/playlist/${selectedPlaylist.id}`)
   }
 
   renderSong = (song) => {
-    const { enableAdd, selectedSongs, loading } = this.state
+    const { enableAdd, selectedSongs } = this.state
     return (
       <SongCard
+        key={song.id}
         song={song}
         handleSelect={this.handleSelect}
         showCheckbox={enableAdd}
@@ -166,9 +176,9 @@ class Home extends React.Component {
       page,
       loading,
       searchText,
+      selectedPlaylist,
       filteredSongs
     } = this.state
-    const playlist = enableAdd ? this.context.state.playlist.playlist : {}
     return (
       <main
         ref={(ref) => this.scrollParentRef = ref}
@@ -177,7 +187,7 @@ class Home extends React.Component {
         {enableAdd ?
           <Grid container item justify="space-between" alignItems="center" className={classes.addToList}>
             <Typography variant="h5" className={classes.title}>
-              Add to Playlist {playlist.name}
+              Add to Playlist {selectedPlaylist.name}
             </Typography>
             <Button
               variant="contained"

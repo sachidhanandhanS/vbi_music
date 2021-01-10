@@ -2,7 +2,7 @@ const styles = () => ({
   container: {
     padding: '60px',
     overflow: 'auto',
-    height: 'calc(100% - 200px)'
+    height: 'calc(100% - 185px)'
   },
   songBody: {
     overflow: 'auto',

@@ -3,26 +3,10 @@ import {
   Link,
   Typography,
   Toolbar,
-  AppBar,
-  makeStyles
+  AppBar
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
-
-const useStyles = makeStyles(() => ({
-  appBar: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  link: {
-    color: 'white',
-    textDecoration: 'none !important',
-    marginLeft: '20px'
-  },
-  title: {
-    fontWeight: 'bold',
-    cursor: 'pointer'
-  },
-}));
+import useStyles from './styles'
 
 const Header = ({ history }) => {
   const classes = useStyles();
