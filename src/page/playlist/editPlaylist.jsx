@@ -122,7 +122,7 @@ class EditPlaylist extends React.Component {
         <Grid container justify="space-between" alignItems="center" className={classes.title}>
           <Typography variant="h5">
             {playlist.name}
-            {playlist.songs && <small className={classes.totalSongs}>{playlist.songs.length} Songs(s)</small>}
+            {playlist.songs && <small className={classes.totalSongs}>{playlist.songs.length} Song(s)</small>}
           </Typography>
           {hasSongs ? (
             <Grid container item xs={6} justify="flex-end">
