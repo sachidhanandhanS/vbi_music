@@ -1,9 +1,11 @@
 import playlistReducer from './playlist'
 import snackbarReducer from './snackbar'
+import songReducer from './song'
 
 const reducers = {
   playlist: playlistReducer,
-  snackbar: snackbarReducer
+  snackbar: snackbarReducer,
+  song: songReducer,
 }
 
 const combineReducer = () => {

@@ -61,7 +61,7 @@ class Home extends React.Component {
         loading: false,
         allSongs: songs,
         filteredSongs: songs,
-        paginatedSongs: [...songs].slice(0, this.pageLimit)
+        paginatedSongs: songs.slice(0, this.pageLimit)
       })
     } catch (e) {
       this.setState({
@@ -116,6 +116,13 @@ class Home extends React.Component {
     }, () => this.handleSearch(value.trim()))
   }
 
+  handleFavourite = (checked, song) => {
+    this.context.dispatch({
+      type: checked ? "ADD_SONG_TO_FAVOURITE" : "REMOVE_SONG_TO_FAVOURITE",
+      payload: song.id
+    })
+  }
+
   addToList = () => {
     const { selectedSongs, selectedPlaylist } = this.state
     const { history } = this.props
@@ -134,12 +141,16 @@ class Home extends React.Component {
 
   renderSong = (song) => {
     const { enableAdd, selectedSongs } = this.state
+    const { favourites } = this.context.state.song
     return (
       <SongCard
         key={song.id}
         song={song}
+        showFavourite
         handleSelect={this.handleSelect}
+        handleFavourite={(checked) => this.handleFavourite(checked, song)}
         showCheckbox={enableAdd}
+        isFavourite={favourites.includes(song.id + '')}
         checked={enableAdd && !!selectedSongs[song.id]}
       />
     )

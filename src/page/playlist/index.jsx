@@ -21,7 +21,7 @@ import {
 const styles = ({
   playlistContainer: {
     paddingTop: '30px',
-    height: '100%'
+    height: 'calc(100% - 92px)'
   },
   title: {
     fontSize: '38px',
@@ -33,7 +33,9 @@ const styles = ({
     border: 'solid 1px #d7dee8',
     backgroundColor: '#ffffff',
     marginTop: '56px',
-    padding: '12px'
+    padding: '12px',
+    overflow: 'auto',
+    maxHeight: 'calc(100% - 120px)'
   },
   playlist: {
     height: '62px',
@@ -46,6 +48,10 @@ const styles = ({
     '&:hover': {
       backgroundColor: 'rgba(245, 246, 250, 0.5)',
     }
+  },
+  totalSongs: {
+    paddingLeft: '10px',
+    color: '#a9a9a9'
   },
   addBtn: {
     fontWeight: 600
@@ -179,13 +185,16 @@ class Playlist extends React.Component {
                 className={classes.playlist}
                 alignItems="center"
               >
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={8}>
                   {playlist.name}
+                  {playlist.songs ? <small className={classes.totalSongs}>
+                    {playlist.songs.length} Song(s)
+                  </small> : ''}
                 </Grid>
-                <Grid item xs={6} sm={5}>
+                <Grid item xs={6} sm={3}>
                   {playlist.createdAt}
                 </Grid>
-                <Grid container item xs={6} sm={1} justify="flex-end" >
+                <Grid container item xs={6} sm={1} justify="flex-end">
                   <CloseIcon
                     color="secondary"
                     onClick={e => this.handleDelete(e, playlist.id)}

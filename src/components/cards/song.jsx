@@ -1,13 +1,19 @@
 import React from 'react'
 import {
   Grid,
-  Checkbox
+  Checkbox,
+  Typography
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/CloseOutlined' 
+import CloseIcon from '@material-ui/icons/CloseOutlined'
+import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import FavouriteIcon from '@material-ui/icons/Favorite'
 import useStyles from './styles'
 
 const Song = ({
   showCheckbox,
+  showFavourite,
+  isFavourite,
+  handleFavourite,
   song,
   checked,
   handleSelect,
@@ -27,11 +33,29 @@ const Song = ({
       <Grid item xs={2} sm={1}>
         <img className={classes.img} src={song.thumbnailUrl} alt={song.title} />
       </Grid>
-      <Grid item xs={showCheckbox ? 8 : 10} sm={10}>
-        {song.title}
+      <Grid container direction="column" item xs>
+        <Typography>{song.title}</Typography>
+        <small>{song.albumTitle}</small>
       </Grid>
-      {handleClose && <Grid item xs={1}>
-        <CloseIcon className={classes.closeIcon} onClick={handleClose} color="secondary" />
+      {showFavourite && <Grid item xs={1} className={classes.textRight}>
+        {isFavourite ? (
+          <FavouriteIcon
+            className={classes.isFavourite}
+            onClick={() => handleFavourite(!isFavourite)}
+          />
+        ) : (
+          <FavouriteBorderIcon
+            className={classes.favouriteIcon}
+            onClick={() => handleFavourite(!isFavourite)}
+          />
+        )}
+      </Grid>}
+      {handleClose && <Grid item xs={1} className={classes.textRight}>
+        <CloseIcon
+          className={classes.closeIcon}
+          onClick={handleClose}
+          color="secondary"
+        />
       </Grid>}
     </Grid>
   )

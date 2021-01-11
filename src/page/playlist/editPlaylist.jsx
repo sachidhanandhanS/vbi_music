@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Container,
   withStyles,
   Typography,
   Grid,
@@ -18,10 +17,21 @@ const styles = ({
     height: 'calc(100% - 185px)'
   },
   title: {
-    marginBottom: '30px'
+    marginBottom: '30px',
+    '& h5': {
+      fontSize: '38px',
+      fontWeight: 'bold',
+      color: '#2e384d',
+    }
   },
   browseBtn: {
     marginTop: '20px'
+  },
+  totalSongs: {
+    paddingLeft: '10px',
+    color: '#a9a9a9',
+    fontSize: '13.33px',
+    fontWeight: 'normal'
   },
   mr20: {
     marginRight: '20px'
@@ -112,6 +122,7 @@ class EditPlaylist extends React.Component {
         <Grid container justify="space-between" alignItems="center" className={classes.title}>
           <Typography variant="h5">
             {playlist.name}
+            {playlist.songs && <small className={classes.totalSongs}>{playlist.songs.length} Songs(s)</small>}
           </Typography>
           {hasSongs ? (
             <Grid container item xs={6} justify="flex-end">

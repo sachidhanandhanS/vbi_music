@@ -1,4 +1,4 @@
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(() => ({
   songComponent: {
@@ -14,9 +14,19 @@ const useStyles = makeStyles(() => ({
     width: "40px",
     height: "40px",
   },
+  textRight: {
+    textAlign: "right",
+  },
   closeIcon: {
     cursor: "pointer",
   },
+  favouriteIcon: {
+    cursor: "pointer",
+  },
+  isFavourite: {
+    cursor: 'pointer',
+    color: 'red'
+  }
 }));
 
-export default useStyles
+export default useStyles;

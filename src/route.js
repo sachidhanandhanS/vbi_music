@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './page/home';
 import PlayList from './page/playlist';
 import EditPlaylist from './page/playlist/editPlaylist';
-import Albums from './page/albums';
 
 const routeConfig = [{
   component: Home,
@@ -17,10 +16,6 @@ const routeConfig = [{
   component: EditPlaylist,
   path: '/playlist/:id',
   exact: true
-}, {
-  component: Albums,
-  exact: true,
-  path: '/albums'
 }];
 
 export default function AppRoutes() {

@@ -26,14 +26,6 @@ const Header = ({ history }) => {
         <Link
           className={classes.link}
           onClick={() => {
-            history.push('/albums')
-          }}
-        >
-          Albums
-        </Link>
-        <Link
-          className={classes.link}
-          onClick={() => {
             history.push('/playlist')
           }}
         >
