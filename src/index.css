@@ -21,3 +21,9 @@ code {
 .text-right {
   text-align: right;
 }
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

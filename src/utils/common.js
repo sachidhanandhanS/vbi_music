@@ -26,3 +26,8 @@ export const shuffleArray = (arr) => {
   const newArray = [...arr]
   return newArray.sort(() => Math.random() - 0.5)
 }
+
+export const  convertToEllipsis = (text, trimLength) => {
+  if (text.length > trimLength) return `${text.slice(0, trimLength)}...`;
+  return text;
+}

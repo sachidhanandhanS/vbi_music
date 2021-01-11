@@ -7,6 +7,7 @@ import {
 import CloseIcon from '@material-ui/icons/CloseOutlined'
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavouriteIcon from '@material-ui/icons/Favorite'
+import { convertToEllipsis } from '../../utils/common'
 import useStyles from './styles'
 
 const Song = ({
@@ -34,8 +35,12 @@ const Song = ({
         <img className={classes.img} src={song.thumbnailUrl} alt={song.title} />
       </Grid>
       <Grid container direction="column" item xs>
-        <Typography>{song.title}</Typography>
-        <small>{song.albumTitle}</small>
+        <Typography title={song.title}>
+          {convertToEllipsis(song.title, 40)}
+        </Typography>
+        <small title={song.albumTitle}>
+          {convertToEllipsis(song.albumTitle, 55)}
+        </small>
       </Grid>
       {showFavourite && <Grid item xs={1} className={classes.textRight}>
         {isFavourite ? (

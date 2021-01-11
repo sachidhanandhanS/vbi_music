@@ -35,6 +35,13 @@ const styles = ({
   },
   mr20: {
     marginRight: '20px'
+  },
+  '@media only screen and (max-width: 600px)': {
+    container: {
+      padding: '20px 10px',
+      overflow: 'auto',
+      height: 'calc(100% - 100px)'
+    },
   }
 })
 
